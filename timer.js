@@ -12,8 +12,13 @@ function start_program() {
     document.querySelector('#active').style.display = 'block';
     document.querySelector('#range_container').style.display = 'block';
     document.querySelector('#mage_container').style.display = 'none';
-    IntervId = setInterval(change_view, 12000)
+    let timer = new Timer(change_view, 8000); // 1 second after first range attack, change on last range attack
 }
+
+// switch to a looped timer
+// add a conditional to Timer for finished state
+// Timer(change_view, 12000)
+// if trampled button, timer.add 3000
 
 function change_view() {
     let range_view = document.querySelector('#range_container');
@@ -34,7 +39,28 @@ function reset_program() {
     document.querySelector('#active').style.display = 'none';
 }
 
-// TODO: different interval at the beginning (1 second after first attack)
-// Add functionality to trampled button
-// Add functionality to reset button
-// Add voice
+function Timer(callback, time) {
+    this.setTimeout(callback, time);
+}
+
+Timer.prototype.setTimeout = function(callback, time) {
+    var self = this;
+    if(this.timer) {
+        clearTimeout(this.timer);
+    }
+    this.finished = false;
+    this.callback = callback;
+    this.time = time;
+    this.timer = setTimeout(function() {
+        self.finished = true;
+        callback();
+    }, time);
+    this.start = Date.now();
+}
+
+Timer.prototype.add = function(time) {
+    if(!this.finished) {
+        time = this.time - (Date.now() - this.start) + time;
+        this.setTimeout(this.callback, time);
+    }
+}
