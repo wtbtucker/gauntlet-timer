@@ -1,4 +1,6 @@
-let gauntlet_timer;
+// TODO
+    // styling
+    // sounds
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#inactive').style.display = 'block';
@@ -11,10 +13,12 @@ function start_program() {
     document.querySelector('#active').style.display = 'block';
     document.querySelector('#range_container').style.display = 'block';
     document.querySelector('#mage_container').style.display = 'none';
-    gauntlet_timer = new timer(change_view, 8000);
+    let initial_interval = 8000;    // Timer runs for 8 seconds only on the first iteration
+    gauntlet_timer = new timer(change_view, initial_interval);
     document.querySelector('#reset').addEventListener("click", reset_program);
     document.querySelector('#trampled').addEventListener("click", trampled);
 }
+
 
 function timer(callback, time) {
     this.callback = callback;
@@ -31,7 +35,7 @@ timer.prototype.timeout = function(time) {
     if (that.running) {
         setTimeout(function(){
             exececute();
-            that.timeout(12000);
+            that.timeout(12000);    // Timer changes to default interval of 12 seconds for the remaining runtime
         }, time)
     }
 }
@@ -49,12 +53,12 @@ timer.prototype.execute = function () {
     }
 };
 
-timer.prototype.addTime = function() {
-    this.extraTime += 3000;
+timer.prototype.addTime = function(time_to_add) {
+    this.extraTime += time_to_add;
 }
 
 function trampled() {
-    if (gauntlet_timer) {gauntlet_timer.addTime(3000);}
+    if (gauntlet_timer) {gauntlet_timer.addTime(3000);} // Trampled by the Hunllef adds 3 seconds to the timer before change
 }
 
 
