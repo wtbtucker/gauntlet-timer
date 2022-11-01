@@ -12,7 +12,7 @@ function start_program() {
     document.querySelector('#range_container').style.display = 'block';
     document.querySelector('#mage_container').style.display = 'none';
     gauntlet_timer = new timer(change_view, 8000);
-    // document.querySelector('#reset').addEventListener("click", gauntlet_timer.reset_program);
+    document.querySelector('#reset').addEventListener("click", reset_program);
     document.querySelector('#trampled').addEventListener("click", trampled);
 }
 
@@ -71,8 +71,8 @@ function change_view() {
 }
 
 function reset_program() {
-    if (tim) {
-        tim.running = false;
+    if (gauntlet_timer.running) {
+        gauntlet_timer.running = false;
         document.querySelector('#inactive').style.display = 'block';
         document.querySelector('#active').style.display = 'none';
     };
