@@ -11,22 +11,29 @@ function start_program() {
     document.querySelector('#active').style.display = 'block';
     document.querySelector('#range_container').style.display = 'block';
     document.querySelector('#mage_container').style.display = 'none';
-    gauntlet_timer = new timer(change_view, 12000);
+    gauntlet_timer = new timer(change_view, 8000);
     // document.querySelector('#reset').addEventListener("click", gauntlet_timer.reset_program);
     document.querySelector('#trampled').addEventListener("click", trampled);
 }
 
-// need an attribute to stop timer
-
-
 function timer(callback, time) {
-    let that = this,
-    execute = function () {
-        that.execute()
-    };
     this.callback = callback;
     this.extraTime = 0;
-    setTimeout(execute, time);
+    this.running = true;
+    this.timeout(time);
+}
+
+timer.prototype.timeout = function(time) {
+    let that = this,
+    exececute = function () {
+        that.execute()
+    };
+    if (that.running) {
+        setTimeout(function(){
+            exececute();
+            that.timeout(12000);
+        }, time)
+    }
 }
 
 timer.prototype.execute = function () {
@@ -49,6 +56,7 @@ timer.prototype.addTime = function() {
 function trampled() {
     if (gauntlet_timer) {gauntlet_timer.addTime(3000);}
 }
+
 
 function change_view() {
     let range_view = document.querySelector('#range_container');
