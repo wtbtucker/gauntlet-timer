@@ -9,19 +9,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="inactive">
+    <div class="inactive container">
         <img id="hunllef" src="images/Hunllef_idle.gif" />
-        <button id="start">Start</button>
-        <span id="start_instructions">Press start one second after first attack</span>
+        <button id="start">
+            Start
+            <span id="start_text">Press one second after first attack</span>
+        </button>
     </div>
-    <div id="active">
-        <div id="range_container">
-            <img id="range_image" src="images/Protect_from_Missiles.png" />
-            <span id="range_span">Pray Range</span>
+    <div class="active container">
+        <div class="range container">
+            <img class="range pray" src="images/Protect_from_Missiles.png" />
+            <h2 id="range_span">Pray Range</h2>
         </div>
-        <div id="mage_container">
-            <img id="mage_image" src="images/Protect_from_Magic.png" />
-            <span id="mage_span">Pray Mage</span>
+        <div class="mage container">
+            <img class="mage pray" src="images/Protect_from_Magic.png" />
+            <h2 id="mage_span">Pray Mage</h2>
         </div>
         <div id="button_container">
             <button id="trampled">Trampled</button>

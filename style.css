@@ -1,4 +1,67 @@
-#inactive {
-    flex-direction: column;
+/* 
+arrange range and mage view
+runescape style border on divs?
+background color for whole site
+dynamic sizing
+
+*/
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;  
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #c0a886;
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 1280px;
+    height: auto;
+    background-color: #e2dbc8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container.active, .container.inactive {
+    box-shadow: 0 0 7px rgb(0 0 0 / 15%);
+}
+
+button {
+    font-size: 17px;
+    font-weight: 700;
+    background: url(images/button_background.gif) no-repeat center;
+    border-radius: 5px;
+    border: lightslategray 1px;
+    box-sizing: content-box;
+    height: 103px;
+    width: 130px;
+    padding: 11px;
+    cursor: pointer;
+}
+
+button:hover {
+    text-decoration: underline solid white;
+}
+
+#start_text {
+    font-size: 15px;
+    display: block;
+}
+
+h2 {
+    font-size: 72px;
+    font-weight: 700;
+    color: black;
+}
+
+.pray {
+    width: 180px;
+    height: auto;
 }
