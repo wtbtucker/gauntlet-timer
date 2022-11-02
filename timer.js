@@ -3,7 +3,7 @@
     // sounds
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#inactive').style.display = 'block';
+    document.querySelector('#inactive').style.display = 'flex';
     document.querySelector('#active').style.display = 'none';
     document.querySelector('#start').addEventListener("click", start_program);
 })
