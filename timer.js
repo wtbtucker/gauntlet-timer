@@ -1,6 +1,7 @@
 // TODO
     // styling
-
+    //trampled lengthens the current interval but shortens the subsequent interval
+    // reset doesn't really seem to work either, it's like another timer is going in the background
     // sounds
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,10 +35,10 @@ timer.prototype.timeout = function(time) {
         that.execute()
     };
     if (that.running) {
-        setTimeout(function(){
+        that.timeout_id = setTimeout(function(){
             exececute();
             that.timeout(12000);    // Timer changes to default interval of 12 seconds for the remaining runtime
-        }, time)
+        }, time);
     }
 }
 
@@ -47,6 +48,7 @@ timer.prototype.execute = function () {
         that.execute()
     };
     if (this.extraTime) {
+        clearTimeout(gauntlet_timer.timeout_id)
         setTimeout(execute, this.extraTime);
         this.extraTime = 0;
     } else {
@@ -78,6 +80,7 @@ function change_view() {
 function reset_program() {
     if (gauntlet_timer.running) {
         gauntlet_timer.running = false;
+        clearTimeout(gauntlet_timer.timeout_id)
         document.querySelector('.inactive').style.display = 'flex';
         document.querySelector('.active').style.display = 'none';
     };
