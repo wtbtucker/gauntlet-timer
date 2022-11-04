@@ -1,8 +1,6 @@
 // TODO
     // styling
     //trampled lengthens the current interval but shortens the subsequent interval
-    // reset doesn't really seem to work either, it's like another timer is going in the background
-    // sounds
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.inactive').style.display = 'flex';
@@ -37,22 +35,25 @@ timer.prototype.timeout = function(time) {
     if (that.running) {
         that.timeout_id = setTimeout(function(){
             exececute();
-            that.timeout(12000);    // Timer changes to default interval of 12 seconds for the remaining runtime
+            console.log(that.timeout_id);
         }, time);
     }
 }
 
-timer.prototype.execute = function () {
+timer.prototype.execute = async function () {
     let that = this,
     execute = function () {
         that.execute()
     };
     if (this.extraTime) {
         clearTimeout(gauntlet_timer.timeout_id)
-        setTimeout(execute, this.extraTime);
+        await delay(this.extraTime);
         this.extraTime = 0;
+        this.callback();
+        that.timeout(12000);
     } else {
         this.callback();
+        that.timeout(12000);
     }
 };
 
@@ -64,7 +65,13 @@ function trampled() {
     if (gauntlet_timer) {gauntlet_timer.addTime(3000);} // Trampled by the Hunllef adds 3 seconds to the timer before change
 }
 
-
+function delay(n) {
+    return new Promise(done => {
+        setTimeout(() => {
+            done();
+        }, n);
+    });
+}
 function change_view() {
     let range_view = document.querySelector('.range');
     let mage_view = document.querySelector('.mage');
